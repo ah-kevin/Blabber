@@ -15,6 +15,7 @@ struct ChatView: View {
       isDisplayingError = true
     }
   }
+
   @State var isDisplayingError = false
 
   @Environment(\.presentationMode) var presentationMode
@@ -42,6 +43,7 @@ struct ChatView: View {
           Task {
             do {
               try await model.shareLocation()
+            } catch is CancellationError {
             } catch {
               lastErrorMessage = error.localizedDescription
             }
